@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Generic image/photo placeholder for proof uploads.
+    Simple landscape with sun - not a profile/person icon.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#E8E4DF"
+        android:pathData="M0,0h96v96h-96z" />
+
+    <!-- Sky gradient area (simplified as lighter band) -->
+    <path
+        android:fillColor="#D4CFC8"
+        android:pathData="M0,0h96v40h-96z" />
+
+    <!-- Sun circle -->
+    <path
+        android:fillColor="#DEB887"
+        android:pathData="M72,28m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0" />
+
+    <!-- Mountain/hill silhouette -->
+    <path
+        android:fillColor="#A07850"
+        android:pathData="M0,96 L0,50 L24,70 L48,40 L72,60 L96,35 L96,96 Z" />
+
+    <!-- Image frame outline (subtle) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#9E9E9E"
+        android:strokeWidth="2"
+        android:pathData="M16,16h64v64h-64z" />
+</vector>

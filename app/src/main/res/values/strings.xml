@@ -20,6 +20,9 @@
     <string name="btn_profile">Profile</string>
     <string name="fab_new_quest">New Quest</string>
     <string name="label_feed_empty">No activity yet. Complete a quest to get started!</string>
+    <string name="label_invite_code_header">Invite code</string>
+    <string name="icon_clipboard">📋</string>
+    <string name="label_recent_activity">🌾 Recent Activity</string>
 
     <!-- ── Quest screens ─────────────────────────────────────────────── -->
     <string name="label_quests_empty">No open quests. Tap + to create one!</string>
@@ -52,6 +55,8 @@
     <string name="label_owned_coupons">My Coupons</string>
     <string name="btn_create_coupon">List a Reward</string>
     <string name="btn_purchase">Purchase</string>
+    <string name="label_cannot_buy_own">You can\'t buy your own</string>
+    <string name="label_available">Available</string>
     <string name="btn_redeem">Mark Redeemed</string>
     <string name="hint_coupon_title">Reward title (max 60 chars)</string>
     <string name="hint_coupon_cost">Coin cost</string>

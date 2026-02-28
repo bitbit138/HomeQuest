@@ -93,15 +93,16 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Proof image (shown when proofImageUrl is set or user picks one) -->
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/detail_IMG_proof"
             android:layout_width="0dp"
             android:layout_height="@dimen/proof_image_height"
             android:layout_marginTop="@dimen/spacing_lg"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder"
+            android:src="@drawable/ic_image_placeholder"
             android:contentDescription="@string/cd_proof_image"
             android:background="@color/hq_surface_variant"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.HomeQuest.RoundedImage"
             app:layout_constraintTop_toBottomOf="@id/detail_LBL_deadline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

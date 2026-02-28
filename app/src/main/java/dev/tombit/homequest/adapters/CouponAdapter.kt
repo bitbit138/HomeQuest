@@ -3,6 +3,7 @@ package dev.tombit.homequest.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import dev.tombit.homequest.R
 import dev.tombit.homequest.databinding.ItemCouponBinding
 import dev.tombit.homequest.interfaces.CouponCallback
 import dev.tombit.homequest.model.Coupon
@@ -47,11 +48,12 @@ class CouponAdapter(private var coupons: List<Coupon>) :
                         binding.couponLBLTitle.paintFlags = binding.couponLBLTitle.paintFlags and android.graphics.Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     }
                     else -> {
-                        binding.couponBTNPurchase.visibility = android.view.View.VISIBLE
-                        binding.couponBTNRedeem.visibility = android.view.View.GONE
                         val isOwnCoupon = sellerId == currentUid
-                        binding.couponBTNPurchase.isEnabled = !isOwnCoupon
-                        binding.couponLBLStatus.text = if (isOwnCoupon) "Your reward" else "Available"
+                        binding.couponBTNPurchase.visibility = if (isOwnCoupon) android.view.View.GONE else android.view.View.VISIBLE
+                        binding.couponBTNRedeem.visibility = android.view.View.GONE
+                        binding.couponLBLStatus.text = binding.root.context.getString(
+                            if (isOwnCoupon) R.string.label_cannot_buy_own else R.string.label_available
+                        )
                         binding.couponLBLTitle.paintFlags = binding.couponLBLTitle.paintFlags and android.graphics.Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     }
                 }

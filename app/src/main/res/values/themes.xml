@@ -72,6 +72,10 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="ShapeAppearance.HomeQuest.RoundedImage" parent="">
+        <item name="cornerSize">12dp</item>
+    </style>
+
     <!-- ── Farmhouse-themed card styles ─────────────────────────────── -->
 
     <!-- Elevated card with wheat-colored border for sections -->

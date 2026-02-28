@@ -1,6 +1,8 @@
 package dev.tombit.homequest.utilities
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
@@ -23,7 +25,9 @@ class SignalManager private constructor(context: Context) {
 
     fun toast(message: String, length: ToastLength = ToastLength.SHORT) {
         contextRef.get()?.let { ctx ->
-            Toast.makeText(ctx, message, length.value).show()
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(ctx, message, length.value).show()
+            }
         }
     }
 

@@ -57,26 +57,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="@color/hq_on_surface"
-                android:maxLines="1"
-                android:ellipsize="end"
-                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName"
+                app:layout_constraintEnd_toStartOf="@id/main_LBL_coins"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/main_IMG_avatar"
-                app:layout_constraintEnd_toStartOf="@id/main_BTN_refresh" />
-
-            <!-- Refresh Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/main_BTN_refresh"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="0dp"
-                app:icon="@android:drawable/ic_menu_rotate"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                style="@style/Widget.Material3.Button.TextButton"
-                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName"
-                app:layout_constraintEnd_toStartOf="@id/main_LBL_coins" />
+                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName" />
 
             <!-- Level -->
             <com.google.android.material.textview.MaterialTextView
@@ -102,7 +91,7 @@
                 app:layout_constraintStart_toEndOf="@id/main_LBL_level"
                 app:layout_constraintBottom_toBottomOf="@id/main_LBL_level" />
 
-            <!-- Coin balance -->
+            <!-- Coin balance (vertically centered with avatar) -->
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/main_LBL_coins"
                 android:layout_width="wrap_content"
@@ -110,9 +99,9 @@
                 android:textAppearance="?attr/textAppearanceTitleSmall"
                 android:textColor="@color/hq_gold"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/main_IMG_avatar"
+                app:layout_constraintBottom_toBottomOf="@id/main_IMG_avatar"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -145,7 +134,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Invite code"
+                android:text="@string/label_invite_code_header"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
                 android:textColor="@color/hq_purple_primary" />
 
@@ -162,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_sm"
-                android:text="📋"
+                android:text="@string/icon_clipboard"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -187,38 +176,45 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/screen_padding"
         android:layout_marginTop="@dimen/spacing_sm"
-        android:text="🌾 Recent Activity"
+        android:text="@string/label_recent_activity"
         style="@style/HomeQuest.SectionHeader"
         app:layout_constraintTop_toBottomOf="@id/main_divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ── Feed RecyclerView ─────────────────────────────────────────── -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_RV_feed"
+    <!-- ── Feed (pull to refresh) ─────────────────────────────────────── -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/main_SRL_feed"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingBottom="@dimen/spacing_md"
-        android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/main_LBL_feedHeader"
         app:layout_constraintBottom_toTopOf="@id/main_BTN_quests"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- ── Empty state for feed ───────────────────────────────────────── -->
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/main_LBL_feedEmpty"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/screen_padding"
-        android:layout_marginTop="@dimen/spacing_sm"
-        android:text="@string/empty_feed"
-        style="@style/HomeQuest.EmptyState"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/main_LBL_feedHeader"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_RV_feed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/spacing_md"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBL_feedEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/screen_padding"
+                android:text="@string/empty_feed"
+                style="@style/HomeQuest.EmptyState"
+                android:visibility="gone" />
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <!-- ── Navigation buttons ────────────────────────────────────────── -->
     <com.google.android.material.button.MaterialButton

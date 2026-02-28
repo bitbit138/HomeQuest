@@ -7,9 +7,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.textview.MaterialTextView
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var main_BTN_rewards: MaterialButton
     private lateinit var main_BTN_profile: MaterialButton
     private lateinit var main_FAB_newQuest: ExtendedFloatingActionButton
-    private lateinit var main_BTN_refresh: MaterialButton
+    private lateinit var main_SRL_feed: SwipeRefreshLayout
 
     private var feedListener: ListenerRegistration? = null
     private lateinit var feedAdapter: FeedAdapter
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         main_BTN_rewards  = binding.mainBTNRewards
         main_BTN_profile  = binding.mainBTNProfile
         main_FAB_newQuest = binding.mainFABNewQuest
-        main_BTN_refresh  = binding.mainBTNRefresh
+        main_SRL_feed     = binding.mainSRLFeed
     }
 
     private fun initViews() {
@@ -96,7 +98,8 @@ class MainActivity : AppCompatActivity() {
         main_BTN_rewards.setOnClickListener  { startActivity(Intent(this, RewardsActivity::class.java)) }
         main_BTN_profile.setOnClickListener  { startActivity(Intent(this, ProfileActivity::class.java)) }
         main_FAB_newQuest.setOnClickListener { startActivity(Intent(this, CreateQuestActivity::class.java)) }
-        main_BTN_refresh.setOnClickListener  { loadCurrentUser() }
+        main_SRL_feed.setOnRefreshListener   { loadCurrentUser() }
+        main_SRL_feed.setColorSchemeColors(ContextCompat.getColor(this, R.color.hq_purple_primary))
     }
 
     private fun loadCurrentUser() {
@@ -107,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             .document(uid)
             .get()
             .addOnSuccessListener { doc ->
+                main_SRL_feed.isRefreshing = false
                 val user = User.fromMap(doc.data ?: return@addOnSuccessListener)
                 currentUser = user
                 SharedPreferencesManager.getInstance().putObject(Constants.SP_KEYS.CURRENT_USER_JSON, user)
@@ -115,6 +119,7 @@ class MainActivity : AppCompatActivity() {
                 startFeedListener(user.householdId)
             }
             .addOnFailureListener { e ->
+                main_SRL_feed.isRefreshing = false
                 SignalManager.getInstance().toast("Failed to load user: ${e.message}")
             }
     }

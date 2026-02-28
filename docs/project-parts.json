@@ -1,0 +1,76 @@
+{
+  "repository_type": "multi-part",
+  "project_name": "HomeQuest",
+  "description": "Gamified household task management app with quests and rewards",
+  "parts": [
+    {
+      "part_id": "mobile",
+      "display_name": "Android Mobile App",
+      "project_type": "mobile",
+      "root_path": "/Users/tombitran/code/HomeQuest/app",
+      "primary_language": "Kotlin",
+      "framework": "Android SDK",
+      "entry_point": "app/src/main/java/dev/tombit/homequest/App.kt",
+      "key_technologies": [
+        "Kotlin 2.0.21",
+        "Android API 26-36",
+        "Material Design 1.13.0",
+        "Firebase SDK (BOM 33.7.0)",
+        "Glide 5.0.5",
+        "Lottie 6.6.6"
+      ]
+    },
+    {
+      "part_id": "backend",
+      "display_name": "Firebase Backend",
+      "project_type": "backend",
+      "root_path": "/Users/tombitran/code/HomeQuest/firebase",
+      "primary_language": "TypeScript",
+      "framework": "Firebase Cloud Functions",
+      "entry_point": "firebase/functions/src/index.ts",
+      "key_technologies": [
+        "TypeScript 5.0.4",
+        "Node.js 20",
+        "firebase-functions 5.0.0",
+        "firebase-admin 12.0.0"
+      ]
+    }
+  ],
+  "integration_points": [
+    {
+      "from": "mobile",
+      "to": "backend",
+      "type": "Firebase Auth",
+      "details": "User authentication and session management"
+    },
+    {
+      "from": "mobile",
+      "to": "backend",
+      "type": "Firestore Real-time Database",
+      "details": "CRUD operations, real-time listeners, offline persistence. Mobile reads/writes data, backend triggers on document changes."
+    },
+    {
+      "from": "mobile",
+      "to": "backend",
+      "type": "Firebase Storage",
+      "details": "Image uploads (proof photos, avatars). Mobile uploads compressed JPEG, storage rules validate format/size."
+    },
+    {
+      "from": "backend",
+      "to": "mobile",
+      "type": "Firebase Cloud Messaging (FCM)",
+      "details": "Push notifications for quest events, level-ups, rewards. Backend sends via Admin SDK, mobile receives via HomeQuestMessagingService."
+    },
+    {
+      "from": "backend",
+      "to": "mobile",
+      "type": "Firestore Triggers",
+      "details": "Cloud Functions update protected fields (coinBalance, currentXp, level) and write activity feed entries. Mobile receives updates via real-time listeners."
+    }
+  ],
+  "shared_dependencies": [
+    "Firebase Project (shared authentication, database, storage)",
+    "Firestore Schema (must maintain compatibility)",
+    "Data Models (mobile mirrors Firestore structure)"
+  ]
+}

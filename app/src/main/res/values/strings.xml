@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HomeQuest</string>
+
+    <!-- ── Auth screens ──────────────────────────────────────────────── -->
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_display_name">Display Name</string>
+    <string name="label_household_name">Household Name</string>
+    <string name="label_invite_code">Invite Code</string>
+    <string name="btn_sign_in">Sign In</string>
+    <string name="btn_sign_up">Create Account</string>
+    <string name="btn_create_household">Create Household</string>
+    <string name="btn_join_household">Join Household</string>
+    <string name="btn_back">Back</string>
+
+    <!-- ── Dashboard ─────────────────────────────────────────────────── -->
+    <string name="btn_quests">Quests</string>
+    <string name="btn_rewards">Rewards</string>
+    <string name="btn_profile">Profile</string>
+    <string name="fab_new_quest">New Quest</string>
+    <string name="label_feed_empty">No activity yet. Complete a quest to get started!</string>
+
+    <!-- ── Quest screens ─────────────────────────────────────────────── -->
+    <string name="label_quests_empty">No open quests. Tap + to create one!</string>
+    <string name="quest_xp_format">+%1$d XP</string>
+    <string name="quest_coins_format">+%1$d coins</string>
+    <string name="status_open">Open</string>
+    <string name="status_claimed">Claimed</string>
+    <string name="status_pending_verification">Pending</string>
+    <string name="status_completed">Done</string>
+    <string name="btn_claim">Claim</string>
+    <string name="btn_upload_proof_action">Upload Proof</string>
+    <string name="btn_claim_and_upload">Claim &amp; Upload Proof</string>
+    <string name="label_cannot_claim_own_quest">You can\'t claim your own quest.</string>
+    <string name="label_quest_cannot_claim">This quest can\'t be claimed right now.</string>
+    <string name="btn_upload_proof">Upload Photo Proof</string>
+    <string name="btn_submit_review">Submit for Review</string>
+    <string name="btn_approve">Approve</string>
+    <string name="hint_quest_title">Quest title (max 80 chars)</string>
+    <string name="hint_quest_description">Description (optional)</string>
+    <string name="hint_xp_reward">XP Reward (10–500)</string>
+    <string name="hint_coin_reward">Coin Reward (5–200)</string>
+    <string name="label_no_deadline">No deadline set</string>
+    <string name="btn_pick_deadline">Pick Deadline</string>
+    <string name="label_recurring">Recurring quest</string>
+    <string name="btn_create_quest">Create Quest</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <!-- ── Rewards screen ────────────────────────────────────────────── -->
+    <string name="label_available_coupons">Available in Market</string>
+    <string name="label_owned_coupons">My Coupons</string>
+    <string name="btn_create_coupon">List a Reward</string>
+    <string name="btn_purchase">Purchase</string>
+    <string name="btn_redeem">Mark Redeemed</string>
+    <string name="hint_coupon_title">Reward title (max 60 chars)</string>
+    <string name="hint_coupon_cost">Coin cost</string>
+    <string name="btn_list_coupon">List Reward</string>
+
+    <!-- ── Profile screen ────────────────────────────────────────────── -->
+    <string name="label_leaderboard">Household Leaderboard</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="btn_change_avatar">Change photo</string>
+    <string name="label_uploading_avatar">Uploading…</string>
+    <string name="label_avatar_updated">Profile photo updated ✨</string>
+
+    <!-- ── Permissions ────────────────────────────────────────────────── -->
+    <string name="label_permission_denied_storage">Photo access is needed to upload proof.</string>
+
+    <!-- ── Accessibility ─────────────────────────────────────────────── -->
+    <string name="cd_avatar">User avatar</string>
+    <string name="cd_proof_image">Quest proof photo</string>
+
+    <!-- ── Empty states ────────────────────────────────────────────────── -->
+    <string name="empty_feed">No activity yet. Complete a quest to get started!</string>
+    <string name="empty_rewards_available">No rewards available. Create one!</string>
+    <string name="empty_rewards_owned">You haven\'t purchased any rewards yet.</string>
+    <string name="empty_leaderboard">No members yet.</string>
+</resources>

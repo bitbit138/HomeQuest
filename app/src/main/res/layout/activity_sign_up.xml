@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Sign up screen — two-step flow:
+    Step 1: Mode selection (CREATE or JOIN) via two large buttons.
+    Step 2: Fields relevant to chosen mode appear below.
+    SignUpActivity controls field visibility based on selected mode.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/hq_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_padding"
+        android:windowSoftInputMode="adjustPan">
+
+        <!-- Title -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/signup_LBL_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:text="Join HomeQuest"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="@color/hq_purple_primary"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- ── Step 1: Mode selection ─────────────────────────────────── -->
+        <!-- Subtitle -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/signup_LBL_modePrompt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="What would you like to do?"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="@color/hq_on_surface"
+            app:layout_constraintTop_toBottomOf="@id/signup_LBL_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Create household card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signup_CARD_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/signup_LBL_modePrompt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_lg">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/signup_LBL_createTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="🏠  Create a new household"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="@color/hq_purple_primary"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="Start fresh. You'll get an invite code to share."
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/hq_on_surface_variant"
+                    app:layout_constraintTop_toBottomOf="@id/signup_LBL_createTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Join household card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signup_CARD_join"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/signup_CARD_create"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_lg">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/signup_LBL_joinTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="🔑  Join an existing household"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="@color/hq_purple_primary"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="Enter an invite code from a family member."
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/hq_on_surface_variant"
+                    app:layout_constraintTop_toBottomOf="@id/signup_LBL_joinTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Step 2: Input fields (hidden until mode selected) ───────── -->
+        <LinearLayout
+            android:id="@+id/signup_LL_fields"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/spacing_lg"
+            app:layout_constraintTop_toBottomOf="@id/signup_CARD_join"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_TIL_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="@string/label_email"
+                style="@style/HomeQuest.TextInput">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_ET_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:autofillHints="emailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_TIL_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="@string/label_password"
+                app:passwordToggleEnabled="true"
+                style="@style/HomeQuest.TextInput">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_ET_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:autofillHints="newPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Display name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_TIL_displayName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="@string/label_display_name"
+                style="@style/HomeQuest.TextInput">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_ET_displayName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:autofillHints="name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Household name (CREATE only) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_TIL_householdName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="@string/label_household_name"
+                android:visibility="gone"
+                style="@style/HomeQuest.TextInput">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_ET_householdName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Invite code (JOIN only) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_TIL_inviteCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="@string/label_invite_code"
+                android:visibility="gone"
+                style="@style/HomeQuest.TextInput">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_ET_inviteCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="6"
+                    android:letterSpacing="0.3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Create household submit -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signup_BTN_createHousehold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_create_household"
+                android:visibility="gone"
+                style="@style/HomeQuest.Button.Primary" />
+
+            <!-- Join household submit -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signup_BTN_joinHousehold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:text="@string/btn_join_household"
+                android:visibility="gone"
+                style="@style/HomeQuest.Button.Primary" />
+
+        </LinearLayout>
+
+        <!-- Back / change mode -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signup_BTN_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/btn_back"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:layout_constraintTop_toBottomOf="@id/signup_LL_fields"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Create Quest screen layout.
+    ID convention: create_{WIDGET}_{descriptor}
+    Includes deadline date picker, recurring switch, reward fields.
+    Client-side validation against Constants.Economy bounds happens in CreateQuestActivity.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/hq_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_padding">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/create_LBL_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="New Quest"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="@color/hq_purple_primary"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Title field -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_TIL_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:hint="@string/hint_quest_title"
+            style="@style/HomeQuest.TextInput"
+            app:layout_constraintTop_toBottomOf="@id/create_LBL_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_ET_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:maxLength="80" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Description field -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_TIL_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:hint="@string/hint_quest_description"
+            style="@style/HomeQuest.TextInput"
+            app:layout_constraintTop_toBottomOf="@id/create_TIL_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_ET_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences|textMultiLine"
+                android:minLines="2"
+                android:maxLength="500" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- XP reward -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_TIL_xp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:hint="@string/hint_xp_reward"
+            style="@style/HomeQuest.TextInput"
+            app:layout_constraintTop_toBottomOf="@id/create_TIL_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/create_TIL_coins">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_ET_xp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Coin reward -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_TIL_coins"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:hint="@string/hint_coin_reward"
+            style="@style/HomeQuest.TextInput"
+            app:layout_constraintTop_toBottomOf="@id/create_TIL_description"
+            app:layout_constraintStart_toEndOf="@id/create_TIL_xp"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_ET_coins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Deadline row -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_BTN_pickDeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="@string/btn_pick_deadline"
+            style="@style/HomeQuest.Button.Outlined"
+            app:layout_constraintTop_toBottomOf="@id/create_TIL_xp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/create_LBL_deadlineValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:text="@string/label_no_deadline"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/hq_on_surface_variant"
+            app:layout_constraintTop_toTopOf="@id/create_BTN_pickDeadline"
+            app:layout_constraintStart_toEndOf="@id/create_BTN_pickDeadline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/create_BTN_pickDeadline" />
+
+        <!-- Create button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_BTN_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="@string/btn_create_quest"
+            style="@style/HomeQuest.Button.Primary"
+            app:layout_constraintTop_toBottomOf="@id/create_BTN_pickDeadline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Cancel -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_BTN_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/btn_cancel"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:layout_constraintTop_toBottomOf="@id/create_BTN_create"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

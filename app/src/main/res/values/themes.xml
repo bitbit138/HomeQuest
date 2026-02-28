@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.HomeQuest" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Warm farmhouse palette -->
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <!-- Warm font family -->
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Splash: fullscreen, same warm background -->
+    <style name="Theme.HomeQuest.Splash" parent="Theme.HomeQuest">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@color/hq_background</item>
+        <item name="android:navigationBarColor">@color/hq_background</item>
+    </style>
+
+    <!-- Card: warm linen surface with soft terracotta shadow -->
+    <style name="HomeQuest.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">@color/hq_surface</item>
+        <item name="strokeColor">@color/md_theme_light_outline</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <!-- Filled button: terracotta -->
+    <style name="HomeQuest.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/hq_purple_primary</item>
+        <item name="android:textColor">@color/hq_on_primary</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+    <!-- Outlined button: terracotta outline -->
+    <style name="HomeQuest.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/hq_purple_primary</item>
+        <item name="android:textColor">@color/hq_purple_primary</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+    <!-- Text input: warm outline -->
+    <style name="HomeQuest.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/hq_purple_primary</item>
+        <item name="hintTextColor">@color/hq_on_surface_variant</item>
+        <item name="android:textColorHint">@color/hq_on_surface_variant</item>
+    </style>
+
+    <!-- DatePicker theme: fix white-on-white contrast -->
+    <style name="HomeQuest.DatePicker" parent="Theme.Material3.DayNight.Dialog">
+        <item name="colorAccent">@color/hq_purple_primary</item>
+        <item name="android:textColorPrimary">@color/hq_on_surface</item>
+        <item name="android:headerBackground">@color/hq_purple_primary</item>
+    </style>
+
+    <style name="ShapeAppearance.HomeQuest.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- ── Farmhouse-themed card styles ─────────────────────────────── -->
+
+    <!-- Elevated card with wheat-colored border for sections -->
+    <style name="HomeQuest.Card.Elevated" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">14dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/hq_cream</item>
+        <item name="strokeColor">@color/hq_wheat</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+
+    <!-- Quest card with herb-green accent -->
+    <style name="HomeQuest.Card.Quest" parent="HomeQuest.Card">
+        <item name="strokeColor">@color/hq_herb</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+
+    <!-- Reward card with sunflower accent -->
+    <style name="HomeQuest.Card.Reward" parent="HomeQuest.Card">
+        <item name="strokeColor">@color/hq_sunflower</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+
+    <!-- ── Chip styles for tags ─────────────────────────────────────── -->
+
+    <!-- Gold/sunflower chip for rewards and coins -->
+    <style name="HomeQuest.Chip.Reward" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/hq_gold_light</item>
+        <item name="android:textColor">@color/hq_copper</item>
+        <item name="chipStrokeColor">@color/hq_sunflower</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- Sage green chip for quests -->
+    <style name="HomeQuest.Chip.Quest" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/hq_teal_container</item>
+        <item name="android:textColor">@color/hq_herb</item>
+        <item name="chipStrokeColor">@color/hq_herb</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- ── Section header style ─────────────────────────────────────── -->
+    <style name="HomeQuest.SectionHeader" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceTitleMedium</item>
+        <item name="android:textColor">@color/hq_chalkboard</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <!-- ── Empty state placeholder style ────────────────────────────── -->
+    <style name="HomeQuest.EmptyState" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceBodyLarge</item>
+        <item name="android:textColor">@color/hq_on_surface_variant</item>
+        <item name="android:background">@color/hq_butter</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    App launcher foreground: simple farmhouse / home icon.
+    Displayed on warm parchment adaptive icon background.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- House body -->
+    <path
+        android:fillColor="#A0522D"
+        android:pathData="M30,58 L30,82 L78,82 L78,58 Z" />
+
+    <!-- Roof -->
+    <path
+        android:fillColor="#7A3B1E"
+        android:pathData="M24,60 L54,28 L84,60 Z" />
+
+    <!-- Door -->
+    <path
+        android:fillColor="#3B1A08"
+        android:pathData="M46,82 L46,65 Q54,60 62,65 L62,82 Z" />
+
+    <!-- Window left -->
+    <path
+        android:fillColor="#C8DCC8"
+        android:strokeColor="#4E6B4E"
+        android:strokeWidth="1.5"
+        android:pathData="M34,62 L34,72 L44,72 L44,62 Z" />
+
+    <!-- Window right -->
+    <path
+        android:fillColor="#C8DCC8"
+        android:strokeColor="#4E6B4E"
+        android:strokeWidth="1.5"
+        android:pathData="M64,62 L64,72 L74,72 L74,62 Z" />
+
+    <!-- Chimney -->
+    <path
+        android:fillColor="#7A3B1E"
+        android:pathData="M62,28 L62,42 L68,42 L68,34 Z" />
+
+    <!-- Star / warmth accent -->
+    <path
+        android:fillColor="#D4A017"
+        android:pathData="M54,36 L55.5,40.5 L60,40.5 L56.5,43.5 L58,48 L54,45 L50,48 L51.5,43.5 L48,40.5 L52.5,40.5 Z" />
+
+</vector>

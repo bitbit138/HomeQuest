@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Quest detail screen layout.
+    ID convention: detail_{WIDGET}_{descriptor}
+    Photo proof section only visible when task is CLAIMED by current user.
+    QuestDetailActivity controls visibility of upload controls.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/hq_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_padding">
+
+        <!-- Back -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detail_BTN_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/btn_back"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Quest title -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detail_LBL_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="@color/hq_on_surface"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/detail_BTN_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Status badge -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detail_LBL_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="@color/hq_on_surface_variant"
+            android:background="@color/hq_surface_variant"
+            app:layout_constraintTop_toBottomOf="@id/detail_LBL_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Description -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detail_LBL_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="@color/hq_on_surface"
+            app:layout_constraintTop_toBottomOf="@id/detail_LBL_status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Rewards line -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detail_LBL_rewards"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            android:textColor="@color/hq_purple_primary"
+            app:layout_constraintTop_toBottomOf="@id/detail_LBL_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Deadline -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detail_LBL_deadline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/hq_on_surface_variant"
+            app:layout_constraintTop_toBottomOf="@id/detail_LBL_rewards"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Proof image (shown when proofImageUrl is set or user picks one) -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/detail_IMG_proof"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/proof_image_height"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_placeholder"
+            android:contentDescription="@string/cd_proof_image"
+            android:background="@color/hq_surface_variant"
+            app:layout_constraintTop_toBottomOf="@id/detail_LBL_deadline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Upload proof button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detail_BTN_uploadProof"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="@string/btn_upload_proof"
+            android:visibility="gone"
+            style="@style/HomeQuest.Button.Outlined"
+            app:layout_constraintTop_toBottomOf="@id/detail_IMG_proof"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Submit for review button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detail_BTN_submitForReview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/btn_submit_review"
+            android:enabled="false"
+            android:visibility="gone"
+            style="@style/HomeQuest.Button.Primary"
+            app:layout_constraintTop_toBottomOf="@id/detail_BTN_uploadProof"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Approve proof button (visible when pending_verification, current user is not claimer) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detail_BTN_approve"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="@string/btn_approve"
+            android:visibility="gone"
+            style="@style/HomeQuest.Button.Primary"
+            app:layout_constraintTop_toBottomOf="@id/detail_BTN_submitForReview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

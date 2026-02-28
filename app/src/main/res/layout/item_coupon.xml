@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Coupon marketplace item layout.
+    ID convention: coupon_{WIDGET}_{descriptor}
+    Two action buttons: purchase (for available coupons) and redeem (for owned ones).
+    Adapter controls visibility of each based on coupon state.
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_xs"
+    android:layout_marginTop="@dimen/spacing_xs"
+    android:layout_marginBottom="@dimen/spacing_sm"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@color/hq_cream"
+    app:strokeColor="@color/hq_sunflower"
+    app:strokeWidth="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_md">
+
+        <!-- Coupon title -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/coupon_LBL_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            android:textColor="@color/hq_on_surface"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/coupon_BTN_purchase" />
+
+        <!-- Coin cost -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/coupon_LBL_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/hq_copper"
+            android:textStyle="bold"
+            android:background="@color/hq_gold_light"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            app:layout_constraintTop_toBottomOf="@id/coupon_LBL_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Status label (Available / Owned / Redeemed) -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/coupon_LBL_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="@color/hq_on_surface_variant"
+            app:layout_constraintTop_toTopOf="@id/coupon_LBL_cost"
+            app:layout_constraintStart_toEndOf="@id/coupon_LBL_cost"
+            app:layout_constraintBottom_toBottomOf="@id/coupon_LBL_cost" />
+
+        <!-- Purchase button — shown for available coupons -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/coupon_BTN_purchase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_purchase"
+            style="@style/HomeQuest.Button.Primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Redeem button — shown for owned, unredeemed coupons by seller -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/coupon_BTN_redeem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_redeem"
+            android:visibility="gone"
+            style="@style/HomeQuest.Button.Outlined"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Rewards Market screen layout.
+    ID convention: rewards_{WIDGET}_{descriptor}
+    Two independent RecyclerViews: available coupons (buyerId==null) and owned coupons.
+    Both driven by separate live Firestore listeners in RewardsActivity.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/hq_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_padding">
+
+        <!-- Header row -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rewards_LBL_heading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="Rewards Market"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="@color/hq_purple_primary"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rewards_BTN_back" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/rewards_BTN_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_back"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:layout_constraintTop_toTopOf="@id/rewards_LBL_heading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/rewards_LBL_heading" />
+
+        <!-- Coin balance -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rewards_LBL_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="@color/hq_gold"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/rewards_LBL_heading"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- List a reward button -->
+
+        <!-- Section: Available -->
+
+        <!-- Available coupons RecyclerView (nested, fixed height) -->
+
+        <!-- Empty state for available coupons -->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/rewards_BTN_createCoupon"
+            style="@style/HomeQuest.Button.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_create_coupon"
+            app:layout_constraintBottom_toBottomOf="@id/rewards_LBL_balance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rewards_LBL_balance"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rewards_LBL_availableHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="84dp"
+            android:text="@string/label_available_coupons"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="@color/hq_on_surface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rewards_LBL_balance" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rewards_RV_available"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rewards_LBL_availableHeader" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rewards_LBL_availableEmpty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/empty_rewards_available"
+            style="@style/HomeQuest.EmptyState"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/rewards_LBL_availableHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Section: Owned -->
+
+        <!-- Owned coupons RecyclerView -->
+
+        <!-- Empty state for owned coupons -->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rewards_LBL_ownedHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="@string/label_owned_coupons"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="@color/hq_on_surface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rewards_RV_available" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rewards_RV_owned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rewards_LBL_ownedHeader"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rewards_LBL_ownedEmpty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/empty_rewards_owned"
+            style="@style/HomeQuest.EmptyState"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/rewards_LBL_ownedHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

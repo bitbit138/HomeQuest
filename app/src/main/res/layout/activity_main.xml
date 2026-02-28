@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hq_background">
+
+    <!-- ── Header card: household name + user stats ──────────────────── -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/main_CV_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:layout_marginTop="@dimen/spacing_lg"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_md">
+
+            <!-- Household name — top full width -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBL_householdName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="@color/hq_on_surface_variant"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Avatar -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/main_IMG_avatar"
+                android:layout_width="@dimen/avatar_large"
+                android:layout_height="@dimen/avatar_large"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_placeholder"
+                android:contentDescription="@string/cd_avatar"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.HomeQuest.Circle"
+                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- Greeting -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBL_greeting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="@color/hq_on_surface"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName"
+                app:layout_constraintStart_toEndOf="@id/main_IMG_avatar"
+                app:layout_constraintEnd_toStartOf="@id/main_BTN_refresh" />
+
+            <!-- Refresh Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/main_BTN_refresh"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="0dp"
+                app:icon="@android:drawable/ic_menu_rotate"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                style="@style/Widget.Material3.Button.TextButton"
+                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName"
+                app:layout_constraintEnd_toStartOf="@id/main_LBL_coins" />
+
+            <!-- Level -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBL_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="@color/hq_purple_primary"
+                app:layout_constraintTop_toBottomOf="@id/main_LBL_greeting"
+                app:layout_constraintStart_toEndOf="@id/main_IMG_avatar" />
+
+            <!-- XP -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBL_xp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="@color/hq_on_surface_variant"
+                app:layout_constraintTop_toTopOf="@id/main_LBL_level"
+                app:layout_constraintStart_toEndOf="@id/main_LBL_level"
+                app:layout_constraintBottom_toBottomOf="@id/main_LBL_level" />
+
+            <!-- Coin balance -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBL_coins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textColor="@color/hq_gold"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/main_LBL_householdName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ── Invite code strip (tap to copy) ──────────────────────────── -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/main_CV_inviteCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/hq_purple_light"
+        app:layout_constraintTop_toBottomOf="@id/main_CV_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_md"
+            android:paddingVertical="@dimen/spacing_sm"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Invite code"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="@color/hq_purple_primary" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_LBL_inviteCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="@color/hq_purple_primary"
+                android:textStyle="bold"
+                android:letterSpacing="0.3" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:text="📋"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ── Section divider ──────────────────────────────────────────── -->
+    <View
+        android:id="@+id/main_divider"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:background="@color/hq_wheat"
+        app:layout_constraintTop_toBottomOf="@id/main_CV_inviteCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── Recent Activity header ──────────────────────────────────── -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_LBL_feedHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:text="🌾 Recent Activity"
+        style="@style/HomeQuest.SectionHeader"
+        app:layout_constraintTop_toBottomOf="@id/main_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── Feed RecyclerView ─────────────────────────────────────────── -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_RV_feed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="@dimen/spacing_md"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/main_LBL_feedHeader"
+        app:layout_constraintBottom_toTopOf="@id/main_BTN_quests"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── Empty state for feed ───────────────────────────────────────── -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_LBL_feedEmpty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:text="@string/empty_feed"
+        style="@style/HomeQuest.EmptyState"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/main_LBL_feedHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── Navigation buttons ────────────────────────────────────────── -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_quests"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/screen_padding"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:text="@string/btn_quests"
+        style="@style/HomeQuest.Button.Outlined"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/main_BTN_rewards" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_rewards"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_xs"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:text="@string/btn_rewards"
+        style="@style/HomeQuest.Button.Outlined"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/main_BTN_quests"
+        app:layout_constraintEnd_toStartOf="@id/main_BTN_profile" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/screen_padding"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:text="@string/btn_profile"
+        style="@style/HomeQuest.Button.Outlined"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/main_BTN_rewards"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── FAB: New Quest ────────────────────────────────────────────── -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/main_FAB_newQuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/screen_padding"
+        android:layout_marginBottom="@dimen/spacing_xl"
+        android:text="@string/fab_new_quest"
+        app:icon="@android:drawable/ic_input_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_BTN_quests" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

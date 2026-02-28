@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── Warm farmhouse palette ──────────────────────────────────────────
+         Inspired by: terracotta pots, aged wood, cream linen, sage herbs,
+         warm kitchen tiles, sunflower yellow, harvest gold.
+    ─────────────────────────────────────────────────────────────────────── -->
+
+    <!-- Primary: terracotta / clay -->
+    <color name="hq_purple_primary">#A0522D</color>      <!-- sienna terracotta -->
+    <color name="hq_purple_dark">#7A3B1E</color>          <!-- dark clay -->
+    <color name="hq_purple_light">#F5E6D3</color>         <!-- linen cream -->
+    <color name="hq_purple_container">#EDD5B8</color>     <!-- warm parchment -->
+    <color name="hq_on_primary_container">#3B1A08</color> <!-- dark espresso -->
+
+    <!-- Secondary: sage green herb -->
+    <color name="hq_teal_secondary">#4E6B4E</color>      <!-- sage -->
+    <color name="hq_teal_container">#C8DCC8</color>      <!-- pale sage -->
+    <color name="hq_on_secondary_container">#0D1F0D</color>
+
+    <!-- Backgrounds: warm cream / aged paper -->
+    <color name="hq_background">#FDF6ED</color>          <!-- warm cream page -->
+    <color name="hq_surface">#FDF6ED</color>
+    <color name="hq_surface_variant">#EDE0CC</color>     <!-- tan/wheat -->
+    <color name="hq_surface_elevated">#F7EDE0</color>    <!-- slightly darker card -->
+
+    <!-- Text: warm espresso wood tones -->
+    <color name="hq_on_surface">#2C1A0E</color>          <!-- dark walnut -->
+    <color name="hq_on_surface_variant">#6B4A2A</color>  <!-- medium oak -->
+    <color name="hq_outline">#A07850</color>             <!-- tan border -->
+
+    <!-- Gold / harvest coins -->
+    <color name="hq_gold">#B8860B</color>                <!-- dark goldenrod -->
+    <color name="hq_gold_light">#FFF4CC</color>
+    <color name="hq_coin">#D4A017</color>
+
+    <!-- Status: natural earthy tones -->
+    <color name="hq_status_open">#3D7A45</color>         <!-- meadow green -->
+    <color name="hq_status_claimed">#B8860B</color>      <!-- harvest gold -->
+    <color name="hq_status_pending">#5A6E8A</color>      <!-- slate blue -->
+    <color name="hq_status_completed">#7A7060</color>    <!-- warm grey -->
+    <color name="hq_error">#B33A2A</color>               <!-- barn red -->
+
+    <!-- On-color text -->
+    <color name="hq_on_primary">#FFFFFF</color>
+    <color name="hq_on_error">#FFFFFF</color>
+
+    <!-- Medals -->
+    <color name="hq_gold_medal">#D4A017</color>
+    <color name="hq_silver_medal">#A8A8A8</color>
+    <color name="hq_bronze_medal">#C47A3A</color>
+
+    <!-- ── Farmhouse accent colors ──────────────────────────────────────
+         Kitchen and farm-inspired touches for a cozy feel.
+    ─────────────────────────────────────────────────────────────────── -->
+    <color name="hq_sunflower">#F4A900</color>       <!-- bright sunflower yellow -->
+    <color name="hq_tomato">#E74C3C</color>          <!-- tomato red for alerts -->
+    <color name="hq_butter">#FFF8DC</color>          <!-- cornsilk/butter for highlights -->
+    <color name="hq_herb">#6B8E23</color>            <!-- olive drab for secondary accents -->
+    <color name="hq_wheat">#DEB887</color>           <!-- burlywood for warm accents -->
+    <color name="hq_copper">#B87333</color>          <!-- copper pot accent -->
+    <color name="hq_cream">#FFFDD0</color>           <!-- cream for card backgrounds -->
+    <color name="hq_chalkboard">#2F4F4F</color>      <!-- dark slate for contrast text -->
+    <color name="hq_apron_red">#CD5C5C</color>       <!-- indian red for soft accents -->
+
+    <!-- Material3 system color mappings -->
+    <color name="md_theme_light_primary">#A0522D</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#EDD5B8</color>
+    <color name="md_theme_light_onPrimaryContainer">#3B1A08</color>
+    <color name="md_theme_light_secondary">#4E6B4E</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#C8DCC8</color>
+    <color name="md_theme_light_onSecondaryContainer">#0D1F0D</color>
+    <color name="md_theme_light_background">#FDF6ED</color>
+    <color name="md_theme_light_onBackground">#2C1A0E</color>
+    <color name="md_theme_light_surface">#FDF6ED</color>
+    <color name="md_theme_light_onSurface">#2C1A0E</color>
+    <color name="md_theme_light_error">#B33A2A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_surfaceVariant">#EDE0CC</color>
+    <color name="md_theme_light_onSurfaceVariant">#6B4A2A</color>
+    <color name="md_theme_light_outline">#A07850</color>
+</resources>

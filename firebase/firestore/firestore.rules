@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper: check if request.auth.uid is a member of a household ──────
+    function isMember(householdId) {
+      return request.auth != null &&
+        request.auth.uid in
+          get(/databases/$(database)/documents/households/$(householdId)).data.members;
+    }
+
+    // ── users ─────────────────────────────────────────────────────────────
+    match /users/{userId} {
+      allow read: if request.auth != null &&
+        (request.auth.uid == userId ||
+         isMember(resource.data.householdId));
+
+      allow create: if request.auth.uid == userId;
+      allow update: if request.auth.uid == userId
+        && !(request.resource.data.diff(resource.data).affectedKeys()
+             .hasAny(['coinBalance', 'currentXp', 'level']));
+
+      allow delete: if false;
+    }
+
+    // ── households ────────────────────────────────────────────────────────
+    match /households/{householdId} {
+
+      // READ: any authenticated user can read.
+      // Required for JOIN flow — querying by inviteCode before membership exists.
+      // Household docs only contain: name, members[], inviteCode — no sensitive data.
+      allow read: if request.auth != null;
+
+      // CREATE: user must include themselves in members[].
+      allow create: if request.auth != null &&
+        request.auth.uid in request.resource.data.members &&
+        request.resource.data.members.size() >= 1;
+
+      // UPDATE: existing members can update, OR a non-member can add only themselves.
+      allow update: if isMember(householdId) ||
+        (request.auth != null &&
+         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['members']) &&
+         request.auth.uid in request.resource.data.members &&
+         !(request.auth.uid in resource.data.members));
+
+      allow delete: if false;
+
+      // ── tasks ──────────────────────────────────────────────────────────
+      match /tasks/{taskId} {
+        allow read, create, update: if isMember(householdId);
+        allow delete: if false;
+      }
+
+      // ── coupons ────────────────────────────────────────────────────────
+      match /coupons/{couponId} {
+        allow read, create, update: if isMember(householdId);
+        allow delete: if false;
+      }
+
+      // ── activity_feed ──────────────────────────────────────────────────
+      match /activity_feed/{entryId} {
+        allow read, create: if isMember(householdId);
+        allow update, delete: if false;
+      }
+    }
+  }
+}

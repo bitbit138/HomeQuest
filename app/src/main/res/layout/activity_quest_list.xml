@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Quest list screen layout.
+    ID convention: questList_{WIDGET}_{descriptor}
+    Empty state label toggled via View.VISIBLE / View.GONE in QuestListActivity.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/questList_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hq_background">
+
+    <!-- Screen title -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/questList_LBL_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:text="Quests"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        android:textColor="@color/hq_purple_primary"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/questList_BTN_back" />
+
+    <!-- Back button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/questList_BTN_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_back"
+        style="@style/Widget.Material3.Button.TextButton"
+        app:layout_constraintTop_toTopOf="@id/questList_LBL_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/questList_LBL_title" />
+
+    <!-- Quest list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/questList_RV_quests"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:paddingBottom="@dimen/spacing_lg"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/questList_LBL_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Empty state -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/questList_LBL_empty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_xl"
+        android:gravity="center"
+        android:text="@string/label_quests_empty"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="@color/hq_on_surface_variant"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/questList_RV_quests"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- FAB: New Quest -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/questList_FAB_newQuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/screen_padding"
+        android:contentDescription="@string/fab_new_quest"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

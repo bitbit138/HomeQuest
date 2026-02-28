@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Profile / Stats screen layout.
+    ID convention: profile_{WIDGET}_{descriptor}
+    Avatar + stats card at top, leaderboard RecyclerView below.
+    Leaderboard data is cached for 60 seconds (Risk Register: MED).
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/hq_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_padding">
+
+        <!-- Back -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/profile_BTN_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/btn_back"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Sign out -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/profile_BTN_signOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_sign_out"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:layout_constraintTop_toTopOf="@id/profile_BTN_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/profile_BTN_back" />
+
+        <!-- ── Profile card ────────────────────────────────────────── -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/profile_CV_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/profile_BTN_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_lg">
+
+                <!-- Avatar (tap to change) -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_IMG_avatar"
+                    android:layout_width="@dimen/avatar_large"
+                    android:layout_height="@dimen/avatar_large"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_placeholder"
+                    android:contentDescription="@string/cd_avatar"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.HomeQuest.Circle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <!-- Display name -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profile_LBL_displayName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_lg"
+                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                    android:textColor="@color/hq_on_surface"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/profile_IMG_avatar"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Level -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profile_LBL_level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_lg"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textColor="@color/hq_purple_primary"
+                    app:layout_constraintTop_toBottomOf="@id/profile_LBL_displayName"
+                    app:layout_constraintStart_toEndOf="@id/profile_IMG_avatar"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- XP progress -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profile_LBL_xp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_lg"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="@color/hq_on_surface_variant"
+                    app:layout_constraintTop_toBottomOf="@id/profile_LBL_level"
+                    app:layout_constraintStart_toEndOf="@id/profile_IMG_avatar"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Coin balance -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profile_LBL_coins"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_lg"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:textAppearance="?attr/textAppearanceLabelLarge"
+                    android:textColor="@color/hq_gold"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/profile_LBL_xp"
+                    app:layout_constraintStart_toEndOf="@id/profile_IMG_avatar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Leaderboard section ─────────────────────────────────── -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/profile_LBL_leaderboardHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="@string/label_leaderboard"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textColor="@color/hq_on_surface"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/profile_CV_stats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_RV_leaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_LBL_leaderboardHeader"
+            app:layout_constraintVertical_bias="0.038" />
+
+        <!-- Empty state for leaderboard -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/profile_LBL_leaderboardEmpty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/empty_leaderboard"
+            style="@style/HomeQuest.EmptyState"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/profile_LBL_leaderboardHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Activity feed item layout.
+    ID convention: feed_{WIDGET}_{descriptor}
+    Lightweight row — no card elevation to keep the feed feeling like a timeline.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/screen_padding"
+    android:paddingTop="@dimen/spacing_sm"
+    android:paddingBottom="@dimen/spacing_md"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Colored left bar — timeline feel with wheat accent -->
+    <View
+        android:id="@+id/feed_divider"
+        android:layout_width="4dp"
+        android:layout_height="0dp"
+        android:background="@color/hq_wheat"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Actor name — who did the thing -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/feed_LBL_actorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:textAppearance="?attr/textAppearanceLabelLarge"
+        android:textColor="@color/hq_purple_primary"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/feed_divider" />
+
+    <!-- Relative timestamp — top right -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/feed_LBL_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        android:textColor="@color/hq_on_surface_variant"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Message — the main feed content, pre-formatted string from Firestore -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/feed_LBL_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="@color/hq_on_surface"
+        android:maxLines="3"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@id/feed_LBL_actorName"
+        app:layout_constraintStart_toEndOf="@id/feed_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

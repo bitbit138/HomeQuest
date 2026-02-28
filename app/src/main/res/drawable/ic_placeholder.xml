@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Default placeholder used by ImageLoader.getInstance().loadImage().
+    Shown while Glide loads a remote image and on any load error.
+    Simple person silhouette on a muted background circle.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#E7E0EC"
+        android:pathData="M48,48m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+
+    <!-- Head -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M48,28m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0" />
+
+    <!-- Body / shoulders -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M28,72 C28,56 36,48 48,48 C60,48 68,56 68,72 Z" />
+
+</vector>

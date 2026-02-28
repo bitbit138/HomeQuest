@@ -9,7 +9,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "dev.tombit.homequest"
+        applicationId = "dev.tombit.homequest2"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

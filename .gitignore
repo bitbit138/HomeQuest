@@ -3,7 +3,8 @@
 /app/build/
 /app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
 /build/
-**/bmad/
+**/_bmad/
+**/_bmad-output/
 
 # Local configuration (machine-specific)
 local.properties

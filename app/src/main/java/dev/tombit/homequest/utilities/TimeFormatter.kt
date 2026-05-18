@@ -7,9 +7,7 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 /**
- * Utility object for all date/time formatting in HomeQuest.
- * Adapted from professor's L04/L08 time helpers.
- * Use these consistently; never format timestamps inline in an Activity or Adapter.
+ * Shared helpers for timestamps (relative time, deadlines, Firestore dates).
  */
 object TimeFormatter {
 

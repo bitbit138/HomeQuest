@@ -4,12 +4,8 @@ import com.google.firebase.Timestamp
 import dev.tombit.homequest.utilities.Constants
 
 /**
- * Represents a HomeQuest user.
- * Schema source: Section 5.1 of architecture document.
- *
- * RULE: private constructor — all construction must go through Builder.
- * coinBalance, currentXp, and level are read-only on the client.
- * They are only written by Cloud Functions via Admin SDK.
+ * Firestore-backed user profile (document id = Auth uid).
+ * Use Builder to construct. Economy fields (coins, XP, level) are updated on the server, not edited arbitrarily from the client.
  */
 data class User private constructor(
     val uid: String,

@@ -11,14 +11,8 @@ import java.io.File
 import java.io.FileOutputStream
 
 /**
- * Client-side image compression utility.
- * Contract (Section 6.2):
- *   - Max dimension: 1280px longest side (downscale only)
- *   - Format: JPEG
- *   - Quality: 80%. Retry at 60% if result > 200 KB.
- *   - Max file size: < 200 KB
- *
- * Uses only BitmapFactory + compress loop — no extra dependency.
+ * Bitmap resize + JPEG compression before upload (BitmapFactory only).
+ * Targets max long edge 1280px, JPEG ~80% quality with a lower-quality retry if still over budget.
  */
 object ImageCompressor {
 

@@ -16,13 +16,8 @@ import dev.tombit.homequest.utilities.FirebaseManager
 import dev.tombit.homequest.utilities.SignalManager
 
 /**
- * Sign-up screen: two-step flow.
- * Step 1: User picks CREATE or JOIN by tapping a card.
- * Step 2: Relevant fields appear; user fills in and submits.
- *
- * Critical rules (Section 5.1, Risk Register):
- *  - users/{uid} document ID must equal Firebase Auth UID.
- *  - Invite code must be globally unique — checked before write; retry on collision.
+ * Sign-up: choose create household or join with invite code, then submit.
+ * User documents use Auth UID as the Firestore document id; invite codes must be unique (retry on collision).
  */
 class SignUpActivity : AppCompatActivity() {
 

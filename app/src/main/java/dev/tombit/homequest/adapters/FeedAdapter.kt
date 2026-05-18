@@ -9,8 +9,7 @@ import dev.tombit.homequest.model.FeedItem
 import dev.tombit.homequest.utilities.TimeFormatter
 
 /**
- * RecyclerView adapter for the activity feed (dashboard + feed screen).
- * Pattern: Professor's L08 adapter structure with inner ViewHolder and ViewBinding.
+ * Dashboard activity feed rows (ViewBinding + FeedCallback).
  */
 class FeedAdapter(private var feedItems: List<FeedItem>) :
     RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {

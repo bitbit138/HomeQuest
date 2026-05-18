@@ -3,7 +3,7 @@
     Profile / Stats screen layout.
     ID convention: profile_{WIDGET}_{descriptor}
     Avatar + stats card at top, leaderboard RecyclerView below.
-    Leaderboard data is cached for 60 seconds (Risk Register: MED).
+    Leaderboard list matches the short cache window used in ProfileActivity.
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"

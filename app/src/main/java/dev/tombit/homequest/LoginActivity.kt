@@ -15,10 +15,8 @@ import dev.tombit.homequest.utilities.SignalManager
 import kotlinx.coroutines.launch
 
 /**
- * Firebase Email/Password sign-in screen.
- * On success: fetches user document, reads householdId, routes to MainActivity.
- * Pattern: findViews() + initViews() from onCreate() (Section 3.2).
- * ViewBinding used throughout (Section 3.3).
+ * Firebase email/password sign-in; opens MainActivity when auth succeeds.
+ * Uses findViews/initViews and ViewBinding.
  */
 class LoginActivity : AppCompatActivity() {
 

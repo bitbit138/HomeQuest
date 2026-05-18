@@ -164,7 +164,7 @@ class CreateQuestActivity : AppCompatActivity() {
             .coinReward(coins)
             .createdBy(user.uid)
             .deadline(selectedDeadline?.let { Timestamp(it) })
-            .isRecurring(false) // Removed recurring option (UX spec)
+            .isRecurring(false) // Non-recurring quests only
             .build()
 
         // Feed entry ref

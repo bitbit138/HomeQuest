@@ -4,13 +4,8 @@ import com.google.firebase.Timestamp
 import dev.tombit.homequest.utilities.Constants
 
 /**
- * Represents a household task/quest.
- * Schema source: Section 5.3 of architecture document.
- *
- * State machine: open → claimed → pending_verification → completed
- * Status values are defined in Constants.TaskStatus — never use raw strings.
- *
- * RULE: private constructor — all construction must go through Builder.
+ * Household task / quest for Firestore.
+ * Lifecycle: open → claimed → pending_verification → completed (see Constants.TaskStatus).
  */
 data class Task private constructor(
     val taskId: String,

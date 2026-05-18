@@ -9,9 +9,8 @@ import dev.tombit.homequest.R
 import java.lang.ref.WeakReference
 
 /**
- * Singleton Glide wrapper. Identical to professor's L05/L08 ImageLoader.
- * RULE: Never call Glide directly from an Activity or Adapter — always use this class.
- * Pattern: Thread-safe double-check locking singleton (professor's standard).
+ * Small Glide facade for loading into ImageViews (thread-safe singleton).
+ * Keeps image loading consistent and avoids scattering Glide calls across UI code.
  */
 class ImageLoader private constructor(context: Context) {
 

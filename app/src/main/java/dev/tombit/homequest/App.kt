@@ -7,11 +7,8 @@ import dev.tombit.homequest.utilities.SharedPreferencesManager
 import dev.tombit.homequest.utilities.SignalManager
 
 /**
- * Application subclass — the ONLY place singletons are initialized.
- * Order matters: FirebaseManager first, then utilities.
- *
- * RULE: No singleton may call init() from an Activity. Only from here.
- * Must be registered in AndroidManifest.xml: android:name=".App"
+ * Application entry: initializes shared singletons (FirebaseManager first, then helpers).
+ * Registered in the manifest as android:name=".App"; avoid calling init from Activities.
  */
 class App : Application() {
 
@@ -24,7 +21,7 @@ class App : Application() {
         SignalManager.init(this)
         SharedPreferencesManager.init(this)
 
-        // Refresh FCM token on every launch to prevent stale tokens (Risk Register: MED)
+        // Refresh FCM token each launch so Firestore has a current device token
         FirebaseManager.getInstance().refreshFcmToken()
     }
 }

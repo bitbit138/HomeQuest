@@ -9,8 +9,7 @@ import dev.tombit.homequest.interfaces.CouponCallback
 import dev.tombit.homequest.model.Coupon
 
 /**
- * RecyclerView adapter for the coupon/rewards marketplace.
- * Pattern: Professor's L08 adapter structure with inner ViewHolder and ViewBinding.
+ * Coupon rows for the rewards screen (ViewBinding + CouponCallback).
  */
 class CouponAdapter(private var coupons: List<Coupon>) :
     RecyclerView.Adapter<CouponAdapter.CouponViewHolder>() {

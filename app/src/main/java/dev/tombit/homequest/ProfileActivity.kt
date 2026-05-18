@@ -29,12 +29,9 @@ import dev.tombit.homequest.utilities.SignalManager
 import android.view.View
 
 /**
- * Profile / Stats screen.
- * Displays level, XP, coin balance for the current user.
- * Leaderboard: fetches all member user docs, sorts client-side by XP desc.
- * Cache: leaderboard result cached for 60 seconds (Risk Register: MED — fine for 2-10 users).
- *
- * Sign-out clears SharedPreferences and navigates to LoginActivity.
+ * Profile and stats: current user, avatar upload, household leaderboard by XP.
+ * Leaderboard results are cached briefly (see Constants.Economy.LEADERBOARD_CACHE_MS).
+ * Sign-out clears prefs and returns to LoginActivity.
  */
 class ProfileActivity : AppCompatActivity() {
 
@@ -50,7 +47,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var leaderboardAdapter: LeaderboardAdapter
     private var currentUser: User? = null
 
-    // Leaderboard cache (Risk Register: MED — 60s cache for small households)
+    // Short-lived cache to avoid refetching leaderboard on every visit
     private var leaderboardCacheTimestamp: Long = 0L
     private var leaderboardCache: List<User> = emptyList()
 
@@ -208,9 +205,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     /**
-     * Fetches all household member user docs. Fan-out read: N members = N reads.
-     * Acceptable for 2-10 users (Risk Register: MED).
-     * Result cached for 60 seconds (Constants.Economy.LEADERBOARD_CACHE_MS).
+     * Loads household member profiles (one read per member), sorts by XP descending.
+     * Results cached for Constants.Economy.LEADERBOARD_CACHE_MS.
      */
     private fun loadLeaderboard(householdId: String) {
         val now = SystemClock.elapsedRealtime()

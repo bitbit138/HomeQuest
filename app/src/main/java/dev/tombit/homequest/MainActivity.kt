@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    /** Load household name + invite code to display in header (Bugs 4 & 6). */
+    /** Load household name and invite code for the dashboard header. */
     private fun loadHouseholdInfo(householdId: String) {
         FirebaseManager.getInstance().firestore
             .collection(Constants.Firestore.HOUSEHOLDS_COLLECTION)

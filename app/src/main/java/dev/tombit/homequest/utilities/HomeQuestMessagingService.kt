@@ -4,15 +4,9 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 /**
- * Handles incoming FCM messages and token refresh events.
- *
- * Token refresh: when Firebase rotates the FCM token, onNewToken() is called.
- * We write the new token to users/{uid}.fcmToken immediately (Risk Register: MED).
- *
- * Message handling: notifications sent by the Cloud Function (index.ts)
- * are display notifications — the system tray handles rendering automatically
- * when the app is in the background. onMessageReceived() is only invoked
- * when the app is in the foreground.
+ * Foreground FCM handling and token rotation.
+ * Token updates are written to users/{uid}.fcmToken so the backend can target this device.
+ * Background notification display is handled by the system; onMessageReceived runs when the app is in the foreground.
  */
 class HomeQuestMessagingService : FirebaseMessagingService() {
 
@@ -30,13 +24,11 @@ class HomeQuestMessagingService : FirebaseMessagingService() {
     }
 
     /**
-     * Called when a data message arrives while the app is in the foreground.
-     * Notification messages (sent by Cloud Function) are handled by the system tray
-     * when the app is backgrounded — no handling needed here for MVP.
+     * Foreground-only handling for notification payloads (system shows notifications when backgrounded).
      */
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        // Foreground notification handling — V2 feature (in-app banner via SignalManager)
+        // Optional: surface notification body while app is open
         message.notification?.body?.let { body ->
             SignalManager.getInstance().toast(body)
         }

@@ -3,11 +3,8 @@ package dev.tombit.homequest.model
 import com.google.firebase.Timestamp
 
 /**
- * Represents a HomeQuest household group.
- * Schema source: Section 5.2 of architecture document.
- *
- * RULE: inviteCode must be globally unique — checked before write (Risk Register: HIGH).
- * RULE: private constructor — all construction must go through Builder.
+ * Household group (members as auth UIDs, shared invite code).
+ * Invite codes must stay unique; creation flow validates before write.
  */
 data class Household private constructor(
     val householdId: String,

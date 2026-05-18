@@ -21,7 +21,7 @@
     <!-- Item layout heights -->
     <dimen name="item_min_height">72dp</dimen>
 
-    <!-- Quest card stroke: sage border for open (UX spec) -->
+    <!-- Quest card stroke when status is open -->
     <dimen name="quest_card_stroke_open">3dp</dimen>
     <dimen name="quest_card_stroke_default">1dp</dimen>
 

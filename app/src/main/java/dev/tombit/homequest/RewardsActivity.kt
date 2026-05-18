@@ -25,13 +25,8 @@ import android.view.View
 import kotlinx.coroutines.launch
 
 /**
- * Rewards Market screen.
- * Two live queries on coupons (Section 2.2):
- *  1. Available: buyerId == null
- *  2. Owned by current user: buyerId == uid
- *
- * Purchase uses Firestore Transaction (Section 7.1) — critical for coin race condition safety.
- * Real-time listener: recommended (registered onResume, removed onPause).
+ * Rewards marketplace: live lists for available coupons and coupons owned by the current user.
+ * Purchases go through a callable Cloud Function for safe coin updates.
  */
 class RewardsActivity : AppCompatActivity() {
 

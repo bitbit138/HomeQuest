@@ -3,12 +3,8 @@ package dev.tombit.homequest.model
 import com.google.firebase.Timestamp
 
 /**
- * Represents a reward coupon in the household marketplace.
- * Schema source: Section 5.4 of architecture document.
- *
- * RULE: buyerId must only be set via Firestore Transaction (Section 7.1).
- *       Never write buyerId directly from the client.
- * RULE: private constructor — all construction must go through Builder.
+ * Marketplace coupon stored under a household.
+ * buyerId is assigned only through the server-side purchase flow, not by direct client writes.
  */
 data class Coupon private constructor(
     val couponId: String,

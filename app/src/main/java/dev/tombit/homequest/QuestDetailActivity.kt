@@ -29,13 +29,9 @@ import dev.tombit.homequest.utilities.SignalManager
 import dev.tombit.homequest.utilities.TimeFormatter
 
 /**
- * Quest detail screen.
- * Handles the task state machine: claimed -> [photo upload] -> pending_verification.
- *
- * Photo upload contract (Section 6.2):
- *  - Client-side JPEG compression: max 1280px, 80% quality, retry 60% if > 200KB
- *  - Storage path: proofs/{householdId}/{taskId}.jpg
- *  - proofImageUrl must be non-null before status advances to pending_verification (Section 11.2)
+ * Quest detail: claim flow, photo proof upload, submit for review, approve.
+ * Proof images are JPEG-compressed (see ImageCompressor), stored under proofs/{householdId}/{taskId}.jpg,
+ * then proofImageUrl is written before moving to pending_verification.
  */
 class QuestDetailActivity : AppCompatActivity() {
 
@@ -198,11 +194,7 @@ class QuestDetailActivity : AppCompatActivity() {
     }
 
     /**
-     * 1. Compresses selected image (Section 6.2 contract).
-     * 2. Uploads to Cloud Storage: proofs/{householdId}/{taskId}.jpg
-     * 3. On success, writes proofImageUrl to Firestore and advances status.
-     *
-     * proofImageUrl MUST be non-null before advancing to pending_verification (Section 11.2).
+     * Compress proof JPEG, upload to Storage, then save download URL and advance task status.
      */
     private fun submitProofAndAdvanceStatus() {
         val uri = selectedImageUri ?: run {
@@ -215,7 +207,7 @@ class QuestDetailActivity : AppCompatActivity() {
         detail_BTN_submitForReview.isEnabled = false
         detail_BTN_submitForReview.text = "Uploading…"
 
-        // Step 1: Compress image (Section 6.2)
+        // Compress proof image
         val compressedBytes = ImageCompressor.compress(this, uri)
         if (compressedBytes == null) {
             SignalManager.getInstance().toast("Could not process image. Try another photo.")
@@ -239,7 +231,7 @@ class QuestDetailActivity : AppCompatActivity() {
                 storageRef.downloadUrl
             }
             .addOnSuccessListener { downloadUri ->
-                // Step 3: Write proofImageUrl + advance status (Section 11.2 — must be non-null)
+                // Persist proof URL and update task status
                 advanceStatusWithProof(task, user.householdId, downloadUri.toString())
             }
             .addOnFailureListener { e ->
@@ -277,7 +269,7 @@ class QuestDetailActivity : AppCompatActivity() {
         
         val updates = mutableMapOf<String, Any>(
             "proofImageUrl" to proofUrl,
-            "status" to Constants.TaskStatus.COMPLETED // Grant XP/coins immediately on upload (UX spec)
+            "status" to Constants.TaskStatus.COMPLETED // Completes immediately after proof in this flow
         )
         
         // If the quest was OPEN, we also need to set claimedBy

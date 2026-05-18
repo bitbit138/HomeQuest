@@ -10,11 +10,8 @@ import com.google.firebase.storage.FirebaseStorage
 import java.lang.ref.WeakReference
 
 /**
- * Central singleton providing access to all Firebase service instances.
- * Pattern: Thread-safe double-check locking (professor's L05/L07/L08 standard).
- *
- * Offline persistence is enabled here as required by Section 11.4.
- * All Firebase singletons are initialized in App.kt only — never in an Activity.
+ * Central singleton for Firebase (Auth, Firestore with offline cache, Storage, Messaging).
+ * Thread-safe double-checked locking; initialized from App only.
  */
 class FirebaseManager private constructor(context: Context) {
 
@@ -23,7 +20,7 @@ class FirebaseManager private constructor(context: Context) {
     // Firebase service references — initialize once, reuse everywhere
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
     val firestore: FirebaseFirestore = FirebaseFirestore.getInstance().also { db ->
-        // Enable offline persistence (Section 11.4)
+        // Firestore offline persistence
         val settings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
             .build()
@@ -44,7 +41,7 @@ class FirebaseManager private constructor(context: Context) {
 
     /**
      * Refreshes the FCM token and writes it to users/{uid}.fcmToken.
-     * Called from App.onCreate() every launch to prevent stale tokens (Risk Register: MED).
+     * Called from App.onCreate() each launch so tokens stay current.
      */
     fun refreshFcmToken() {
         val uid = currentUid ?: return

@@ -1,9 +1,7 @@
 package dev.tombit.homequest.utilities
 
 /**
- * All application constants grouped into nested objects.
- * No string/int literals are permitted in any Activity, Adapter, or Manager class.
- * Add to the appropriate nested object; never create loose top-level constants.
+ * Firestore paths, task statuses, economy limits, and prefs keys used across the app.
  */
 class Constants {
 

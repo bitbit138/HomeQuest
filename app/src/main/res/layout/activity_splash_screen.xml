@@ -3,7 +3,7 @@
     Splash screen layout.
     ID convention: splash_{WIDGET}_{descriptor}
     LottieAnimationView ID: splash_LOTTIE_lottie (matches SplashScreenActivity binding ref).
-    autoPlay="false" — animation is started manually in startAnimation() per L08 pattern.
+    autoPlay="false" — animation is started from SplashScreenActivity after inflate.
     loop="false" — plays once then triggers onAnimationEnd → navigateNext().
 -->
 <androidx.constraintlayout.widget.ConstraintLayout

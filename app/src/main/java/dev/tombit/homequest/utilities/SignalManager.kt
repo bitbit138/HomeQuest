@@ -10,9 +10,7 @@ import android.widget.Toast
 import java.lang.ref.WeakReference
 
 /**
- * Singleton manager for all user feedback signals (Toast, vibration).
- * RULE: Never call Toast.makeText() directly anywhere in the app. Always use this class.
- * Pattern: Thread-safe double-check locking singleton (professor's L05 standard).
+ * Toasts and vibration feedback (thread-safe singleton).
  */
 class SignalManager private constructor(context: Context) {
 

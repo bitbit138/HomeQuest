@@ -11,11 +11,8 @@ import dev.tombit.homequest.databinding.ActivitySplashScreenBinding
 import dev.tombit.homequest.utilities.FirebaseManager
 
 /**
- * Entry point activity. Plays a Lottie animation, then routes to:
- *   - MainActivity if user is already authenticated
- *   - LoginActivity if user is not authenticated
- *
- * Pattern: Professor's L08 SplashScreenActivity exactly (Section 3.12).
+ * App entry: plays the splash animation, then opens MainActivity if signed in,
+ * otherwise LoginActivity.
  */
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -51,7 +48,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 navigateNext()
             }
             override fun onAnimationStart(p0: Animator) {
-                // Pre-fetch could begin here in V2
+                // Pre-fetch could begin here after splash
             }
             override fun onAnimationCancel(p0: Animator) {
                 navigateNext()

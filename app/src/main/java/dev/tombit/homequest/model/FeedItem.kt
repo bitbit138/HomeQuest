@@ -4,12 +4,8 @@ import com.google.firebase.Timestamp
 import dev.tombit.homequest.utilities.Constants
 
 /**
- * Represents a single entry in the household activity feed.
- * Schema source: Section 5.5 of architecture document.
- *
- * Write-optimized denormalized log — message is pre-formatted for direct display.
- * RULE: Feed entries are IMMUTABLE after write (no update, no delete from client).
- * RULE: private constructor — all construction must go through Builder.
+ * One row in the household activity feed (preformatted message for the UI).
+ * Treat as append-only from the client perspective.
  */
 data class FeedItem private constructor(
     val entryId: String,

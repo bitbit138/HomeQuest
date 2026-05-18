@@ -8,9 +8,7 @@ import dev.tombit.homequest.model.User
 import dev.tombit.homequest.utilities.ImageLoader
 
 /**
- * RecyclerView adapter for the leaderboard on ProfileActivity.
- * Data is pre-sorted by XP descending before being passed in.
- * Pattern: Professor's L08 adapter structure with inner ViewHolder and ViewBinding.
+ * Leaderboard rows on Profile (users already sorted by XP descending).
  */
 class LeaderboardAdapter(private var users: List<User>) :
     RecyclerView.Adapter<LeaderboardAdapter.LeaderboardViewHolder>() {

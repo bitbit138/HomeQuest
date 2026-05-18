@@ -13,12 +13,7 @@ import dev.tombit.homequest.utilities.Constants
 import dev.tombit.homequest.utilities.TimeFormatter
 
 /**
- * RecyclerView adapter for the task/quest list.
- * Structure: inner ViewHolder with ViewBinding, callback wired in ViewHolder init block.
- * Pattern: Professor's L08 MovieAdapter structure exactly.
- *
- * RULE: callback is nullable and always safe-called (?.)
- * RULE: Callback assigned as anonymous object in the hosting Activity — never a lambda.
+ * Quest list rows with ViewBinding; events go through QuestCallback from the hosting Activity.
  */
 class QuestAdapter(private var quests: List<Task>) :
     RecyclerView.Adapter<QuestAdapter.QuestViewHolder>() {
@@ -44,7 +39,7 @@ class QuestAdapter(private var quests: List<Task>) :
                 binding.questLBLCoins.text = ctx.getString(R.string.quest_coins_format, coinReward)
                 binding.questLBLDeadline.text = TimeFormatter.toDeadlineLabel(deadline)
 
-                // Late/Tomorrow Banner (UX spec)
+                // Deadline urgency banner
                 val banner = binding.questLBLBanner
                 val isOverdue = TimeFormatter.isOverdue(deadline)
                 val isTomorrow = TimeFormatter.isDeadlineTomorrow(deadline)
@@ -70,7 +65,7 @@ class QuestAdapter(private var quests: List<Task>) :
                     }
                 }
 
-                // Button text and state based on status (UX spec)
+                // Claim / upload labels by task status
                 val btn = binding.questBTNClaim
                 when (status) {
                     Constants.TaskStatus.OPEN -> {
@@ -96,7 +91,7 @@ class QuestAdapter(private var quests: List<Task>) :
                     }
                 }
 
-                // Sage border for open quests (UX spec: cozy farm house styling)
+                // Distinct border when quest is still open
                 val card = binding.root
                 if (status == Constants.TaskStatus.OPEN) {
                     card.setStrokeColor(ContextCompat.getColor(ctx, R.color.hq_teal_secondary))

@@ -6,9 +6,7 @@ import com.google.gson.Gson
 import java.lang.ref.WeakReference
 
 /**
- * Singleton SharedPreferences manager — V3 pattern from professor's L05.
- * Provides typed get/set helpers and JSON serialization via Gson.
- * Pattern: Thread-safe double-check locking singleton.
+ * SharedPreferences helper with Gson-backed object storage (singleton).
  */
 class SharedPreferencesManager private constructor(context: Context) {
 

@@ -1,12 +1,14 @@
 package dev.tombit.homequest
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
@@ -74,25 +76,39 @@ class CreateQuestActivity : AppCompatActivity() {
     }
 
     private fun showDatePicker() {
-        val cal = Calendar.getInstance()
-        val dialog = DatePickerDialog(
-            this,
-            R.style.HomeQuest_DatePicker,
-            { _, year, month, day ->
-                val selected = Calendar.getInstance().apply { 
-                    set(Calendar.YEAR, year)
-                    set(Calendar.MONTH, month)
-                    set(Calendar.DAY_OF_MONTH, day)
-                }.time
-                selectedDeadline = selected
-                create_LBL_deadlineValue.text = "$day/${month + 1}/$year"
-            },
-            cal.get(Calendar.YEAR),
-            cal.get(Calendar.MONTH),
-            cal.get(Calendar.DAY_OF_MONTH)
-        )
-        dialog.datePicker.minDate = System.currentTimeMillis()
-        dialog.show()
+        if (supportFragmentManager.findFragmentByTag(TAG_DEADLINE_PICKER) != null) return
+
+        val todayStartMillis = Calendar.getInstance().run {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+            timeInMillis
+        }
+
+        val constraints = CalendarConstraints.Builder()
+            .setStart(todayStartMillis)
+            .setValidator(DateValidatorPointForward.from(todayStartMillis))
+            .build()
+
+        val initialMillis = selectedDeadline?.time ?: todayStartMillis
+
+        val picker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(getString(R.string.btn_pick_deadline))
+            .setCalendarConstraints(constraints)
+            .setSelection(initialMillis)
+            .build()
+
+        picker.addOnPositiveButtonClickListener { utcMillis ->
+            selectedDeadline = Date(utcMillis)
+            val cal = Calendar.getInstance().apply { timeInMillis = utcMillis }
+            val day = cal.get(Calendar.DAY_OF_MONTH)
+            val month = cal.get(Calendar.MONTH) + 1
+            val year = cal.get(Calendar.YEAR)
+            create_LBL_deadlineValue.text = "$day/$month/$year"
+        }
+
+        picker.show(supportFragmentManager, TAG_DEADLINE_PICKER)
     }
 
     private fun attemptCreateQuest() {
@@ -182,5 +198,9 @@ class CreateQuestActivity : AppCompatActivity() {
                 create_BTN_create.isEnabled = true
                 SignalManager.getInstance().toast(e.message ?: "Failed to create quest")
             }
+    }
+
+    companion object {
+        private const val TAG_DEADLINE_PICKER = "deadline_date_picker"
     }
 }
